@@ -1,9 +1,8 @@
+# Ignore vendor directory
 /vendor/
 
-node_modules/
+# Ignore composer.lock
+composer.lock
 
-npm-debug.log/vendor/
-
-node_modules/
-
-npm-debug.log
+# Ignore .env file
+.env
