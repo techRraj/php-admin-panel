@@ -80,6 +80,11 @@
                         <a class="c-sidebar-nav-link" href="{{ url('/admin/cities') }}">
                         <i class="nav-icon icon-circle-blank mr-2"></i> Cities</a>
                     </li>
+                    <li class="c-sidebar-nav-item">
+                        <a class="c-sidebar-nav-link" href="{{ url('/admin/banks') }}">
+                        <i class="nav-icon icon-circle-blank mr-2"></i> Country Bank</a>
+                    </li>
+
                 </ul>
             </li>
             <li class="c-sidebar-nav-title">

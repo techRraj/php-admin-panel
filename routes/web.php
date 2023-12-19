@@ -71,13 +71,13 @@ Route::prefix('admin')->group(function() {
 
                  // ===================== Raj ADMIN COUNTRY PAGE =====================//
                                      /*Admin Country Route*/
-Route::get('/countries1', 'Admin\CountryController2@index')->name('admin.countries');
+Route::get('/countries1', 'Admin\CountryController2@index')->name('admin.countries1');
 Route::get('/get-countries1', 'Admin\CountryController2@getCountriesData')->name('admin.get_countries');
 Route::get('/delete-country1/{id}', 'Admin\CountryController2@destroy')->name('admin.delete_country');
 Route::get('/create-country1', 'Admin\CountryController2@create')->name('admin.create-country');
 Route::post('/store-country1', 'Admin\CountryController2@store')->name('admin.store-country1');
 Route::get('/edit-country1/{id?}', 'Admin\CountryController2@edit')->name('admin.edit-country1 ');
-Route::post('/update-country1', 'Admin\CountryController2@update')->name('admin.update-country');
+Route::post('/update-country1', 'Admin\CountryController2@update')->name('admin.update-country1');
 //====================================================================================================//
 
 
@@ -101,7 +101,28 @@ Route::get('/create-state2', 'Admin\StateController2@create')->name('admin.creat
 Route::post('/store-state2', 'Admin\StateController2@store')->name('admin.store-state2');
 Route::get('/edit-state2/{id?}', 'Admin\StateController2@edit')->name('admin.edit-state');
 Route::post('/update-state2', 'Admin\StateController2@update')->name('admin.update-state');
-////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ===========================================================================================================//
+
+                    /*Admin Banks Route*/
+//////////////////////////////////////////////////////////////////////////////////////////// 
+Route::get('/banks', 'Admin\BankController2@index')->name('admin.banks');
+Route::get('/get-banks2', 'Admin\BankController2@getBanksData')->name('admin.get_banks');
+Route::get('/delete-banks2/{id}', 'Admin\BankController2@destroy')->name('admin.delete_bank');
+Route::get('/create-banks2', 'Admin\BankController2@create')->name('admin.create-bank');
+Route::post('/store-banks2', 'Admin\BankController2@store')->name('admin.store-banks2');
+Route::get('/edit-banks2/{id?}', 'Admin\BankController2@edit')->name('admin.edit-banks2');
+Route::post('/update-bank', 'Admin\BankController2@update')->name('admin.update-bank');
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ===========================================================================================================//
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////1
+                                          /*Admin city Route*/
+ Route::get('/cities', 'Admin\CityController@index')->name('admin.cities');
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////1
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////1
+
     /*Admin Suggestion Route*/
     Route::get('/suggestions', 'Admin\SuggestionController@index')->name('admin.suggestions');
     Route::get('/get-suggestions', 'Admin\SuggestionController@getSuggestionData')->name('admin.get_suggestions');

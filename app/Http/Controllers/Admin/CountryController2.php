@@ -34,27 +34,53 @@ class CountryController2 extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function getCountriesData()
-    {
-        $countries = Country::latest()->get();
+    // public function getCountriesData()
+    // {
+    //     $countries = Country::latest()->get();
         
-        return Datatables::of($countries)
-                ->addIndexColumn()
-                ->addColumn('edit', function($row){
+    //     return Datatables::of($countries)
+    //             ->addIndexColumn()
+    //             ->addColumn('edit', function($row){
 
-                   $btn = '<a href="'.url('admin/edit-country1/').'/'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</a>';
+    //                $btn = '<a href="'.url('admin/edit-country1/').'/'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</a>';
 
-                    return $btn;
-                })
-                ->addColumn('delete', function($row){
-                   $btn = '<button  onclick="deleteArtist('.$row->id.');" class="delete btn btn-danger btn-sm">Delete</button>';
+    //                 return $btn;
+    //             })
+    //             ->addColumn('delete', function($row){
+    //                $btn = '<button  onclick="deleteArtist('.$row->id.');" class="delete btn btn-danger btn-sm">Delete</button>';
 
-                    return $btn;
-                })
-                ->rawColumns(['edit', 'delete'])
-                ->make(true);
-    }
-    /**
+    //                 return $btn;
+    //             })
+    //             ->rawColumns(['edit', 'delete'])
+    //             ->make(true);
+    // }
+
+
+
+
+    // Example server-side code
+    public function getCountriesData()
+{
+    $countries = Country::latest()->get();
+
+    return Datatables::of($countries)
+        ->addIndexColumn()
+        ->addColumn('name', function ($row) {
+            return $row->name;
+        })
+        ->addColumn('country_code', function ($row) {
+            return $row->country_code; // Add this line to include country_code
+        })
+        ->addColumn('edit', function ($row) {
+            return '<a href="'.url('admin/edit-country1/').'/'.$row->id.'" class="edit btn btn-primary btn-sm">Edit</a>';
+        })
+        ->addColumn('delete', function ($row) {
+            return '<button onclick="deleteArtist('.$row->id.');" class="delete btn btn-danger btn-sm">Delete</button>';
+        })
+        ->rawColumns(['edit', 'delete'])
+        ->make(true);
+}
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -70,20 +96,42 @@ class CountryController2 extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function store(Request $request)
+    // {
+        
+    //     $request->validate([
+    //         'name' => 'required|min:3|max:255',
+             
+    //     ]);
+
+    //     $country = Country::create([
+    //         'name' => $request->name,
+    //     ]);
+
+    //     return redirect()->route('admin.countries')->with('success', 'Country Added Successfully! Made by Raj');
+    // }
+
+
     public function store(Request $request)
     {
-        
-        $request->validate([
-            'name' => 'required|min:3|max:255',
-             
-        ]);
+        // Update the validation rule to match the new field name
+$request->validate([
+    'name' => 'required|min:3|max:255',
+    'country_code' => 'required|digits:6',
+]);
 
-        $country = Country::create([
-            'name' => $request->name,
-        ]);
+// Update the column name in the create method
+$country = Country::create([
+    'name' => $request->name,
+    'country_code' => $request->input('country_code'),
+]);
 
-        return redirect()->route('admin.countries')->with('success', 'Country Added Successfully! Made by Raj');
+return redirect()->route('admin.countries')->with('success', 'Country Added Successfully! Made by Raj');
+
     }
+    
+
+
 
     /**
      * Display the specified resource.
@@ -118,18 +166,22 @@ class CountryController2 extends Controller
         
         $request->validate([
             'name' => 'required|min:3|max:255',
-            
+            'country_code' => 'required|digits:6',
+
 
         ]);
 
         $data = [
             'name' => $request->name,
+            'country_code' => $request->country_code,
+
+
         ];
 
         $country = Country::where('id', $request->id)
             ->update($data);
 
-        return redirect()->route('admin.countries')->with('success', 'Country Updated Successfully!');
+        return redirect()->route('admin.countries1')->with('success', 'Country Updated Successfully!');
     }
 
     /**
